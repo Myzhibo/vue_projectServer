@@ -50,7 +50,6 @@ console.log('用户的mock数据准备完毕')
 
 
 
-
 app.get('/',(req, res)=>{
 console.log('ok');
 res.send("123")
@@ -105,9 +104,72 @@ app.get('/userData',(req, res)=>{
 })
 
 //测试post-req
-app.post('/test1',(req, res)=>{
+app.post('/login',(req, res)=>{
     console.log('--->> ',req.body)
-    res.send('接到了')
+    if(req.body.username =='admin' && req.body.password =='123'){
+        res.send( [
+            {
+                path: '/',
+                name: 'home',
+                label: '首页',
+                icon: 's-home',
+                url: 'Home/Home'
+            },
+            {
+                path: '/mall',
+                name: 'mall',
+                label: '商品管理',
+                icon: 'shopping-bag-1', //'video-play',
+                url: 'MallManage/MallManage'
+            },
+            {
+                path: '/user',
+                name: 'user',
+                label: '用户管理',
+                icon: 'user',
+                url: 'UserManage/UserManage'
+            },
+            {
+                label: '其他',
+                icon: 'location',
+                children: [
+                    {
+                    path: '/page1',
+                    name: 'page1',
+                    label: '页面1',
+                    icon: 'setting',
+                    url: 'Other/PageOne'
+                    },
+                    {
+                    path: '/page2',
+                    name: 'page2',
+                    label: '页面2',
+                    icon: 'setting',
+                    url: 'Other/PageTwo'
+                    }
+                ]
+            },
+        ])
+    }else if(req.body.username =='miniadm' && req.body.password =='123'){
+        res.send( [
+            {
+                path: '/',
+                name: 'home',
+                label: '首页',
+                icon: 's-home',
+                url: 'Home/Home'
+            },
+            {
+                path: '/mall',
+                name: 'mall',
+                label: '商品管理',
+                icon: 'shopping-bag-1', //'video-play',
+                url: 'MallManage/MallManage'
+            }
+        ])
+    }else{
+        res.send(false)
+    }
 })
 
 app.listen(5001, (err)=>{   //此时启动服务器:  http://localhost:5001/
